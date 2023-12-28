@@ -8,15 +8,18 @@ const JobDetails = () => {
     const params = useSearchParams();
     const router = useRouter();
 
-    const {data, isLoading, error, refetch} = useFetch('job-details', {job_id: params.id})
+    const {data, isLoading, error, refresh} = useFetch('job-details', {job_id: params.id})
     const [refreshing, setRefreshing] = useState(false);
     const onRefresh = useCallback(() => {
       setRefreshing(true);
-      refetch();
+      refresh();
       setRefreshing(false);
     })
     const tabs = ['About', 'Qualifications', 'Responsibilities'];
     const [activeTab, setActiveTab] = useState(tabs[1])
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
 
     const displayTabContent = () => {
         switch(activeTab){
@@ -54,6 +57,7 @@ const JobDetails = () => {
       >
       </Stack.Screen>
 
+      <>
       <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {isLoading ? (
           <ActivityIndicator size="large" color={COLORS.primary} />
@@ -75,7 +79,15 @@ const JobDetails = () => {
             }
           </View>
         )}
+    
       </ScrollView>
+        
+        <JobFooter 
+            url={data } 
+        />      
+        
+      </>
+
     </SafeAreaView>
   )
 }

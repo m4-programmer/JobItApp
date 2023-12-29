@@ -1,0 +1,1 @@
+export const rapidApiKey = '252cb040f6msh8d5876bc0e04bd2p15dde5jsn4e6bf1aee0a8' 

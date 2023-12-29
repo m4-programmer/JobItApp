@@ -4,7 +4,7 @@ import { icons, SIZES } from '../../../constants'
 import styles from './welcome.style'
 import { useRouter } from 'expo-router'
 
-const Welcome = () => {
+const Welcome = ({searchTerm, setSearchTerm, handleClick}) => {
   const router = useRouter();
   const jobTypes = ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Internship']
   const [activeJobType, setActiveJobType] = React.useState('Full-time')
@@ -19,14 +19,14 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value=""
-            onChange={() => {}}
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text) }
             placeholder="What are you looking for?"
             placeholderTextColor="#666"
           />
         </View>
 
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+        <TouchableOpacity style={styles.searchBtn} onPress={handleClick}>
           <Image
             source={icons.search}
             resizeMode="contain"
